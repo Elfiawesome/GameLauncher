@@ -4,11 +4,10 @@ var zipLink=""
 
 var ZipPath="user://EliteCardWarsGame.zip"
 var ZipLink="https://github.com/Elfiawesome/EliteCardWars/releases/download/TestingBuilds/EliteCardWarsTestingBuild_v1.0.4.4.zip"
-var version_path
-
 var http_request: HTTPRequest
 
 func _ready():
+	_initialize_file_links()
 	self.disabled=true
 	var IsUpdate=CheckForAnyUpdates()
 
@@ -19,6 +18,21 @@ func file_exists(path: String):
 	var dir=Directory.new()
 	return dir.file_exists(path)
 
+func _initialize_file_links():#For uploading purposes only
+	var HostData = {
+		"EliteCardWars":{
+			"Version":"1.0.0",
+			"FileLink":"https://github.com/Elfiawesome/EliteCardWars/releases/download/TestingBuilds/EliteCardWarsTestingBuild_v1.0.4.4.zip"
+		},
+		"OtherThing":{
+			"Version":"0.0.1",
+			"FileLink":""
+		}
+	}
+	var file=File.new()
+	file.open("res://GameFileLinks/HostData.json",File.WRITE)
+	file.store_string(to_json(HostData))
+	file.close()
 #func _ready():
 #	_verify_gamefiles()
 #	self.disabled=true
