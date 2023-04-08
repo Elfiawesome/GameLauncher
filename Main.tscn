@@ -51,7 +51,7 @@ margin_bottom = 40.0
 [node name="Button" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 margin_top = 60.0
 margin_right = 904.0
-margin_bottom = 165.0
+margin_bottom = 265.0
 custom_constants/separation = 0
 
 [node name="Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/Button"]
@@ -68,5 +68,11 @@ margin_top = 100.0
 margin_right = 904.0
 margin_bottom = 105.0
 rect_min_size = Vector2( 0, 5 )
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/Button"]
+margin_top = 105.0
+margin_right = 904.0
+margin_bottom = 205.0
+rect_min_size = Vector2( 0, 100 )
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Button/Button" to="MarginContainer/HBoxContainer/VBoxContainer/Button/Button" method="_on_Button_pressed"]

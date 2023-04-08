@@ -13,6 +13,7 @@ enum ButtonState{
 	PlayGame
 }
 var _ProgressBar
+var _Thumnail
 var thread = Thread.new()
 
 func _ready():
@@ -20,6 +21,7 @@ func _ready():
 	self.disabled=true
 	_get_server_HostData()
 	_ProgressBar=$"../ProgressBar"
+	_Thumnail=$"../TextureRect"
 
 func _on_game_ready():
 	self.disabled=false
@@ -62,6 +64,8 @@ func _on_HostData_ready():
 	if !NewHostData.has(GameName):
 		self.text="HostData Missing Game Link..."
 		return
+	if NewHostData[GameName].has("ThumbnailLink"):
+		_get_game_thumbnail(NewHostData[GameName]["ThumbnailLink"])
 	#Set exe file
 	exe_file=NewHostData[GameName]["FileName"]
 	#Check main GameFolder folder exists
@@ -88,6 +92,7 @@ func _on_HostData_ready():
 		self.text="Download Game"
 	#Allow clicking button
 	self.disabled=false
+
 
 func _on_GameDownloaded_ready(GameZip: String, version:String):
 	#Unzip game
@@ -169,6 +174,18 @@ func _process(delta):
 func _receive_download_file(result, response_code, headers, body, GameZip, version):
 	remove_child(http_request)
 	_on_GameDownloaded_ready(GameZip,version)
+
+#Request for game image
+func _get_game_thumbnail(link:String):
+	var http_request_Thumbnail = HTTPRequest.new()
+	add_child(http_request_Thumbnail)
+	http_request_Thumbnail.connect("request_completed", self, "_receive_game_thumbnail")
+	http_request_Thumbnail.request(link)
+	http_request_Thumbnail.set_download_file("user://"+GameName+"Thumnail")
+	print(link)
+
+func _receive_game_thumbnail():
+	pass
 
 #Request for server details
 func _get_server_HostData():
