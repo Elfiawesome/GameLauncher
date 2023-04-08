@@ -48,14 +48,25 @@ color = Color( 0.0156863, 0.0235294, 0.0901961, 1 )
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Button" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 margin_top = 60.0
 margin_right = 904.0
-margin_bottom = 160.0
+margin_bottom = 165.0
+custom_constants/separation = 0
+
+[node name="Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/Button"]
+margin_right = 904.0
+margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
 text = "Download Game"
 script = ExtResource( 1 )
 
-[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Button" to="MarginContainer/HBoxContainer/VBoxContainer/Button" method="_on_Button_pressed"]
+[node name="ProgressBar" type="ColorRect" parent="MarginContainer/HBoxContainer/VBoxContainer/Button"]
+margin_top = 100.0
+margin_right = 904.0
+margin_bottom = 105.0
+rect_min_size = Vector2( 0, 5 )
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Button/Button" to="MarginContainer/HBoxContainer/VBoxContainer/Button/Button" method="_on_Button_pressed"]

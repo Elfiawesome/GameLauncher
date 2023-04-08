@@ -2,7 +2,7 @@ extends Button
 
 var NewHostData: Dictionary
 var http_request: HTTPRequest
-var GameName="EliteCardWarsBeta"
+var GameName="EliteCardWars"
 var exe_file: String
 var state=ButtonState.DownloadGame
 
@@ -12,11 +12,14 @@ enum ButtonState{
 	UpdateGame,
 	PlayGame
 }
+var _ProgressBar
+var thread = Thread.new()
 
 func _ready():
 	_initialize_file_links()
 	self.disabled=true
 	_get_server_HostData()
+	_ProgressBar=$"../ProgressBar"
 
 func _on_game_ready():
 	self.disabled=false
@@ -30,7 +33,8 @@ func _on_Button_pressed():
 			#Download Game Zip
 			var Link=NewHostData[GameName]["FileLink"]
 			var Version=NewHostData[GameName]["Version"]
-			_get_download_file(Link,FileLocation,Version)
+			#_get_download_file(Link,FileLocation,Version)
+			thread.start(self,"_get_download_file",[Link,FileLocation,Version])
 		ButtonState.UpdateGame:
 			#Remove all files
 			var FileLocation="user://GameFolders/"+GameName
@@ -49,11 +53,17 @@ func _on_Button_pressed():
 			#Download Game Zip
 			var Link=NewHostData[GameName]["FileLink"]
 			var Version=NewHostData[GameName]["Version"]
-			_get_download_file(Link,FileLocation,Version)
+			_get_download_file([Link,FileLocation,Version])
 		ButtonState.PlayGame:
 			OS.shell_open(OS.get_user_data_dir()+"/GameFolders/"+GameName+"/"+exe_file)
 
 func _on_HostData_ready():
+	#Check if host data has the game
+	if !NewHostData.has(GameName):
+		self.text="HostData Missing Game Link..."
+		return
+	#Set exe file
+	exe_file=NewHostData[GameName]["FileName"]
 	#Check main GameFolder folder exists
 	if !dir_exists("user://GameFolders"):
 		file_create_folder("user://","GameFolders")
@@ -128,8 +138,17 @@ func Get_version_value(version: String):
 		c+=1
 	return total
 
-func _get_download_file(link:String, path:String, version:String):
-	var http_request = HTTPRequest.new()
+
+var bodySize: int
+var downloadedBytes: int
+var yes=false
+#var http_request: HTTPRequest
+func _get_download_file(args):
+	var link=args[0]
+	var path=args[1]
+	var version=args[2]
+	yes=true
+	http_request = HTTPRequest.new()
 	add_child(http_request)
 	
 	self.text="Downloading "+str(link.get_file())
@@ -138,6 +157,14 @@ func _get_download_file(link:String, path:String, version:String):
 	var error=http_request.request(link)
 	if error!=OK:
 		self.text="Error: "+str(error)
+
+func _process(delta):
+	if yes:
+		bodySize = http_request.get_body_size()
+		downloadedBytes = http_request.get_downloaded_bytes()
+		print(int(downloadedBytes*100/bodySize))
+		var wid=rect_size.x
+		_ProgressBar.rect_size=Vector2(wid*downloadedBytes/bodySize,_ProgressBar.rect_size.y)
 
 func _receive_download_file(result, response_code, headers, body, GameZip, version):
 	remove_child(http_request)
@@ -153,9 +180,6 @@ func _get_server_HostData():
 func _receive_server_HostData(result, response_code, headers, body):
 	var StringResult=body.get_string_from_utf8()
 	NewHostData = JSON.parse(StringResult).result
-	print(NewHostData)
-	#Set exe file
-	#exe_file=NewHostData[GameName]["FileName"]
 	_on_HostData_ready()
 	print("Succesfully received Server HostData")
 
