@@ -1,39 +1,23 @@
-[gd_resource type="Theme" load_steps=52 format=2]
+[gd_resource type="Theme" load_steps=51 format=2]
 
-[ext_resource path="res://themes/OpenSans-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://themes/ebrima.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://themes/icons.svg" type="Texture" id=2]
 
 [sub_resource type="DynamicFont" id=21]
+size = 20
 font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0, 0, 0, 1 )
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
+bg_color = Color( 0.0980392, 0.113725, 0.196078, 1 )
 border_color = Color( 0.282353, 0.282353, 0.282353, 1 )
 
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 1, 1, 1, 0 )
-border_width_bottom = 1
-border_color = Color( 0.282353, 0.282353, 0.282353, 1 )
-expand_margin_bottom = 3.0
-
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0, 0, 0, 1 )
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color( 1, 1, 1, 1 )
+[sub_resource type="StyleBoxFlat" id=50]
+bg_color = Color( 0.156863, 0.184314, 0.266667, 1 )
+border_color = Color( 1, 0, 0, 1 )
+anti_aliasing_size = 0.886
 
 [sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0.129412, 0.129412, 0.129412, 1 )
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
+bg_color = Color( 0.156863, 0.184314, 0.266667, 1 )
 border_color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="AtlasTexture" id=22]
@@ -349,14 +333,15 @@ corner_radius_bottom_left = 2
 [resource]
 default_font = SubResource( 21 )
 Button/colors/font_color = Color( 1, 1, 1, 1 )
-Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
-Button/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
+Button/colors/font_color_disabled = Color( 1, 1, 1, 1 )
+Button/colors/font_color_focus = Color( 0.941176, 0.941176, 0.941176, 1 )
+Button/colors/font_color_hover = Color( 1, 1, 1, 1 )
 Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
 Button/constants/hseparation = 2
 Button/fonts/font = SubResource( 21 )
 Button/styles/disabled = SubResource( 1 )
-Button/styles/focus = SubResource( 2 )
-Button/styles/hover = SubResource( 3 )
+Button/styles/focus = SubResource( 50 )
+Button/styles/hover = SubResource( 1 )
 Button/styles/normal = SubResource( 1 )
 Button/styles/pressed = SubResource( 4 )
 CheckBox/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )

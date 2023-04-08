@@ -12,7 +12,12 @@ config_version=4
 
 config/name="CardWarsLauncher"
 run/main_scene="res://Main.tscn"
+boot_splash/show_image=false
 config/icon="res://icon.png"
+
+[display]
+
+window/size/borderless=true
 
 [gui]
 
