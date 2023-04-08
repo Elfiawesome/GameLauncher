@@ -231,7 +231,8 @@ func _initialize_file_links():#For uploading purposes only
 		"EliteCardWars":{
 			"Version":"1.0.0",
 			"FileLink":"https://github.com/Elfiawesome/EliteCardWars/releases/download/TestingBuilds/EliteCardWarsTestingBuild_v1.0.4.4.zip",
-			"FileName":"EliteCardWars.exe"
+			"FileName":"EliteCardWars.exe",
+			"ThumbnailLink":"https://raw.githubusercontent.com/Elfiawesome/GameLauncher/main/GameFileLinks/Thumbnails/EliteCardWars.JPG"
 		},
 		"EliteCardWarsBeta":{
 			"Version":"0.0.1",
