@@ -3,7 +3,7 @@ extends Button
 var NewHostData: Dictionary
 var http_request: HTTPRequest
 var GameName="EliteCardWarsBeta"
-var exe_file="EliteCardWars.exe"
+var exe_file: String
 var state=ButtonState.DownloadGame
 
 enum ButtonState{
@@ -153,6 +153,9 @@ func _get_server_HostData():
 func _receive_server_HostData(result, response_code, headers, body):
 	var StringResult=body.get_string_from_utf8()
 	NewHostData = JSON.parse(StringResult).result
+	print(NewHostData)
+	#Set exe file
+	#exe_file=NewHostData[GameName]["FileName"]
 	_on_HostData_ready()
 	print("Succesfully received Server HostData")
 
@@ -203,11 +206,13 @@ func _initialize_file_links():#For uploading purposes only
 	var HostData = {
 		"EliteCardWars":{
 			"Version":"1.0.0",
-			"FileLink":"https://github.com/Elfiawesome/EliteCardWars/releases/download/TestingBuilds/EliteCardWarsTestingBuild_v1.0.4.4.zip"
+			"FileLink":"https://github.com/Elfiawesome/EliteCardWars/releases/download/TestingBuilds/EliteCardWarsTestingBuild_v1.0.4.4.zip",
+			"FileName":"EliteCardWars.exe"
 		},
 		"EliteCardWarsBeta":{
 			"Version":"0.0.1",
-			"FileLink":"https://github.com/Elfiawesome/EliteCardWars/releases/download/TestingBuilds/EliteCardWarsTestingBuild_v1.0.4.4.zip"
+			"FileLink":"https://github.com/Elfiawesome/EliteCardWars/releases/download/TestingBuilds/EliteCardWarsTestingBuild_v1.0.4.4.zip",
+			"FileName":"EliteCardWars.exe"
 		},
 		"OtherThing":{
 			"Version":"0.0.1",
