@@ -2,7 +2,7 @@ extends Button
 
 var NewHostData: Dictionary
 var http_request: HTTPRequest
-var GameName="EliteCardWars"
+var GameName="EliteCardWarsBeta"
 var exe_file="EliteCardWars.exe"
 var state=ButtonState.DownloadGame
 
