@@ -52,13 +52,13 @@ func _initialize_file_links():#For uploading purposes only
 		"LetThereBeChaos":{
 			"Version":"0.0.1",
 			"FileLink":"https://github.com/Elfiawesome/GameLauncher/releases/download/OtherGames/LetThereBeChaos.zip",
-			"FileName":"PlatformerEngine.exe",
+			"FileName":"LetThereBeChaos.exe",
 			"ThumbnailLink":"https://raw.githubusercontent.com/Elfiawesome/GameLauncher/main/GameFileLinks/Thumbnails/LetThereBeChaos.jpg"
 		},
 		"SkyVessels2022":{
 			"Version":"0.0.1",
 			"FileLink":"https://github.com/Elfiawesome/GameLauncher/releases/download/OtherGames/SkyVessels2022.zip",
-			"FileName":"PlatformerEngine.exe",
+			"FileName":"SkyVessels2022.exe",
 			"ThumbnailLink":"https://raw.githubusercontent.com/Elfiawesome/GameLauncher/main/GameFileLinks/Thumbnails/SkyVessels2022.jpg"
 		}
 	}
