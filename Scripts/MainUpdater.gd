@@ -47,7 +47,7 @@ func _initialize_file_links():#For uploading purposes only
 			"Version":"0.0.1",
 			"FileLink":"https://github.com/Elfiawesome/GameLauncher/releases/download/OtherGames/PlatformerEngine.zip",
 			"FileName":"PlatformerEngine.exe",
-			"ThumbnailLink":"https://raw.githubusercontent.com/Elfiawesome/GameLauncher/main/GameFileLinks/Thumbnails/PlatformerEngine.png"
+			"ThumbnailLink":"https://raw.githubusercontent.com/Elfiawesome/GameLauncher/main/GameFileLinks/Thumbnails/PlatformerEngine.jpg"
 		}
 	}
 	var UpdaterData={
