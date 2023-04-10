@@ -66,7 +66,7 @@ func _get_Thumbnail(link:String, FileLocation:String):
 	HttpRequest_Thumbnail.set_download_file(DownloadDir)
 	var error=HttpRequest_Thumbnail.request(link)
 	if error!=OK:
-		print("Error Request Thumbnail: "+error)
+		print("Error Request Thumbnail: "+str(error))
 func _receive_Thumbnail(result, _response_code, _headers, _body, FileLocation):
 	remove_child(HttpRequest_Thumbnail)
 	if result==0:
@@ -115,7 +115,9 @@ func _get_Game(link:String, FileLocation:String, Version:String):
 	HttpRequest_Game.set_download_file(DownloadDir)
 	var error=HttpRequest_Game.request(link)
 	if error!=OK:
-		print("Error Request Game Files: "+error)
+		print("Error Request Game Files: "+str(error))
+		IsDownloadingGame=false
+		return
 	IsDownloadingGame=true
 func _receive_Game(result, _response_code, _headers, _body, FileLocation, Version):
 	remove_child(HttpRequest_Game)

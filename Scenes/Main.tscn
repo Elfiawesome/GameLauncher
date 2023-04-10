@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scripts/DownloadButton.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/TileBar.gd" type="Script" id=2]
@@ -8,11 +8,12 @@
 [ext_resource path="res://Scenes/sys_button.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Visuals/Icons/ExpandDrawer.png" type="Texture" id=7]
 [ext_resource path="res://Scripts/ToggleExpand.gd" type="Script" id=8]
-[ext_resource path="res://Visuals/themes/OpenSans-Regular.tres" type="DynamicFont" id=9]
+[ext_resource path="res://Visuals/themes/DynamicFont_Ebrima.tres" type="DynamicFont" id=9]
 [ext_resource path="res://Visuals/Icons/controller.png" type="Texture" id=10]
 [ext_resource path="res://Scenes/NavItem.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Visuals/Icons/SettingsGear.svg" type="Texture" id=12]
 [ext_resource path="res://Scripts/Page_Games.gd" type="Script" id=13]
+[ext_resource path="res://Scripts/MainUpdater.gd" type="Script" id=14]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -48,19 +49,20 @@ tracks/0/keys = {
 [node name="Main" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 14 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="bg" type="ColorRect" parent="MarginContainer"]
-margin_right = 1024.0
-margin_bottom = 600.0
+margin_right = 1080.0
+margin_bottom = 720.0
 color = Color( 0.156863, 0.184314, 0.266667, 1 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
-margin_right = 1024.0
-margin_bottom = 600.0
+margin_right = 1080.0
+margin_bottom = 720.0
 size_flags_vertical = 3
 custom_constants/separation = 0
 
@@ -95,7 +97,7 @@ texture = ExtResource( 7 )
 [node name="NavItems" type="VBoxContainer" parent="MarginContainer/HBoxContainer/SideBar/VBoxContainer"]
 margin_top = 60.0
 margin_right = 120.0
-margin_bottom = 600.0
+margin_bottom = 720.0
 size_flags_vertical = 3
 custom_constants/separation = 0
 
@@ -118,13 +120,13 @@ anims/SideBarExpandAnimation = SubResource( 3 )
 
 [node name="MainBox" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 margin_left = 120.0
-margin_right = 1024.0
-margin_bottom = 600.0
+margin_right = 1080.0
+margin_bottom = 720.0
 size_flags_horizontal = 3
 custom_constants/separation = 0
 
 [node name="TileBar" type="Control" parent="MarginContainer/HBoxContainer/MainBox"]
-margin_right = 904.0
+margin_right = 960.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_vertical = 3
@@ -138,20 +140,20 @@ custom_constants/separation = 0
 alignment = 2
 
 [node name="MinButton" parent="MarginContainer/HBoxContainer/MainBox/TileBar/HBoxContainer" instance=ExtResource( 6 )]
-margin_left = 754.0
-margin_right = 804.0
+margin_left = 810.0
+margin_right = 860.0
 Type = 0
 Icon = ExtResource( 4 )
 
 [node name="MaxButton3" parent="MarginContainer/HBoxContainer/MainBox/TileBar/HBoxContainer" instance=ExtResource( 6 )]
-margin_left = 804.0
-margin_right = 854.0
+margin_left = 860.0
+margin_right = 910.0
 Type = 1
 Icon = ExtResource( 5 )
 
 [node name="CloseButton4" parent="MarginContainer/HBoxContainer/MainBox/TileBar/HBoxContainer" instance=ExtResource( 6 )]
-margin_left = 854.0
-margin_right = 904.0
+margin_left = 910.0
+margin_right = 960.0
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/MainBox/TileBar"]
 anchor_right = 1.0
@@ -164,8 +166,8 @@ valign = 1
 
 [node name="Body" type="Control" parent="MarginContainer/HBoxContainer/MainBox"]
 margin_top = 30.0
-margin_right = 904.0
-margin_bottom = 600.0
+margin_right = 960.0
+margin_bottom = 720.0
 size_flags_vertical = 3
 
 [node name="Page_Games" type="Control" parent="MarginContainer/HBoxContainer/MainBox/Body"]

@@ -2,12 +2,11 @@ extends Control
 var HostData: Dictionary
 var IsHostDataReady=false
 var HostDataLink: String = "https://raw.githubusercontent.com/Elfiawesome/GameLauncher/main/GameFileLinks/HostData.json"
-var GameList=[]
+var GameListOrder=[]
 var HttpRequest: HTTPRequest
 
 func _ready():
 	_get_HostData()
-	_initialize_file_links()
 
 func _get_HostData():
 	HttpRequest=HTTPRequest.new()
@@ -26,20 +25,23 @@ func _receive_HostData(result, _response_code, _headers, body):
 		_on_HostData_ready()
 func _on_HostData_ready():	
 	var GameButton=preload("res://Scenes/GameButton.tscn")
-	var curx=0
-	var cury=0
-	for i in 4:
-		var curGame="EliteCardWars"
-		if i!=3:
-			curGame+=str(i)
-		
+	var curpos=Vector2(0,0)
+	var pagebox=self.rect_size
+	var offset=30
+	for m in HostData:
+		var curGame=m
 		var Game=GameButton.instance()
 		if HostData.has(curGame):
 			Game.GameName=curGame
 			Game.HostData=HostData[curGame]
-		Game.rect_position=Vector2(curx,cury)
+		Game.rect_position=curpos+Vector2(offset,offset)
 		add_child(Game)
-		curx+=200
+		
+		var boxsize=Game.rect_size
+		curpos.x+=(boxsize.x+offset)
+		if (curpos.x+boxsize.x) > (pagebox.x-offset):
+			curpos.x=0
+			curpos.y+=(boxsize.y+offset)
 
 func _on_Page_Games_visibility_changed():
 	if visible:
@@ -48,30 +50,3 @@ func _on_Page_Games_visibility_changed():
 		pass
 		
 
-func _initialize_file_links():#For uploading purposes only
-	var HostData = {
-		"EliteCardWars":{
-			"Version":"1.0.41",
-			"FileLink":"https://github.com/Elfiawesome/EliteCardWars/releases/download/TestingBuilds/EliteCardWarsTestingBuild_v1.0.4.1.zip",#"https://github.com/Elfiawesome/EliteCardWars/releases/download/TestingBuilds/EliteCardWarsTestingBuild_v1.0.4.4.zip",
-			"FileName":"EliteCardWars.exe",
-			"ThumbnailLink":"https://raw.githubusercontent.com/Elfiawesome/GameLauncher/main/GameFileLinks/Thumbnails/EliteCardWars.JPG"
-		},
-		"EliteCardWarsBeta":{
-			"Version":"0.0.1",
-			"FileLink":"https://github.com/Elfiawesome/EliteCardWars/releases/download/TestingBuilds/EliteCardWarsTestingBuild_v1.0.4.4.zip",
-			"FileName":"EliteCardWars.exe"
-		},
-		"InvalidGame":{
-		},
-		"GameTestHere":{
-			
-		},
-		"OtherThing":{
-			"Version":"0.0.1",
-			"FileLink":""
-		}
-	}
-	var file=File.new()
-	file.open("res://GameFileLinks/HostData.json",File.WRITE)
-	file.store_string(to_json(HostData))
-	file.close()

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scripts/NavItem.gd" type="Script" id=1]
 [ext_resource path="res://Visuals/Icons/controller.png" type="Texture" id=2]
-[ext_resource path="res://Visuals/themes/OpenSans-Regular.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Visuals/themes/DynamicFont_Ebrima.tres" type="DynamicFont" id=3]
 
 [node name="NavItem" type="ColorRect"]
 margin_right = 120.0
