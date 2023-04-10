@@ -1,5 +1,5 @@
 extends Control
-export(int) var VersionNumber = 0
+export(int) var VersionNumber = -1
 var HttpRequest: HTTPRequest
 
 func _ready():
@@ -12,11 +12,19 @@ func _ready():
 	_get_launcherDetails()
 func _get_launcherDetails():
 	HttpRequest=HTTPRequest.new()
+	add_child(HttpRequest)
 	HttpRequest.connect("request_completed",self,"_receive_launcherDetails")
-	HttpRequest.request("")
+	var error=HttpRequest.request("https://raw.githubusercontent.com/Elfiawesome/GameLauncher/main/GameFileLinks/LauncherData.json")
+	if error!=OK:
+		print("Error Requesting Server Host Data: "+str(error))
 func _receive_launcherDetails(result, _response_code, _headers, body):
+	remove_child(HttpRequest)
 	if result==0:
-		pass
+		var StringResult=body.get_string_from_utf8()
+		var LauncherData=JSON.parse(StringResult).result
+		print("Succesfully receive LauncherData")
+		if int(LauncherData["Version"])>VersionNumber:
+			print("Version Update Required")
 
 #Functions
 func file_exists(path: String):

@@ -14,7 +14,7 @@ func _get_HostData():
 	HttpRequest.connect("request_completed",self,"_receive_HostData")
 	var error=HttpRequest.request(HostDataLink)
 	if error!=OK:
-		print("Error Requesting Server Host Data: "+error)
+		print("Error Requesting Server Host Data: "+str(error))
 func _receive_HostData(result, _response_code, _headers, body):
 	if result==0:#If successful
 		remove_child(HttpRequest)

@@ -20,7 +20,6 @@ var GameDir="user://GameFolders/"
 
 func _ready():
 	Animator.play_backwards("RESET")
-	print(HostData)
 	GameDir="user://GameFolders/"+GameName
 	#Create Main Game Directory
 	if !dir_exists("user://GameFolders/"):
