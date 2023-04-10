@@ -48,6 +48,18 @@ func _initialize_file_links():#For uploading purposes only
 			"FileLink":"https://github.com/Elfiawesome/GameLauncher/releases/download/OtherGames/PlatformerEngine.zip",
 			"FileName":"PlatformerEngine.exe",
 			"ThumbnailLink":"https://raw.githubusercontent.com/Elfiawesome/GameLauncher/main/GameFileLinks/Thumbnails/PlatformerEngine.jpg"
+		},
+		"LetThereBeChaos":{
+			"Version":"0.0.1",
+			"FileLink":"https://github.com/Elfiawesome/GameLauncher/releases/download/OtherGames/LetThereBeChaos.zip",
+			"FileName":"PlatformerEngine.exe",
+			"ThumbnailLink":"https://raw.githubusercontent.com/Elfiawesome/GameLauncher/main/GameFileLinks/Thumbnails/LetThereBeChaos.jpg"
+		},
+		"SkyVessels2022":{
+			"Version":"0.0.1",
+			"FileLink":"https://github.com/Elfiawesome/GameLauncher/releases/download/OtherGames/SkyVessels2022.zip",
+			"FileName":"PlatformerEngine.exe",
+			"ThumbnailLink":"https://raw.githubusercontent.com/Elfiawesome/GameLauncher/main/GameFileLinks/Thumbnails/SkyVessels2022.jpg"
 		}
 	}
 	var UpdaterData={
