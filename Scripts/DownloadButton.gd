@@ -19,9 +19,9 @@ var _Thumnail
 #var thread = Thread.new()
 
 func _ready():
-	_initialize_file_links()
+	#_initialize_file_links()
 	self.disabled=true
-	_get_server_HostData()
+	#_get_server_HostData()
 	_ProgressBar=$"../ProgressBar"
 	_Thumnail=$"../Thumbnail"
 
@@ -121,7 +121,6 @@ func CheckForAnyUpdates():
 	
 	var newest_version_value=Get_version_value(newest_version)
 	var current_version_value=Get_version_value(current_version)
-	
 	if newest_version_value>current_version_value:
 		return true
 	else:
@@ -180,7 +179,9 @@ func _get_game_thumbnail(link:String):
 	add_child(http_request_Thumbnail)
 	http_request_Thumbnail.connect("request_completed", self, "_receive_game_thumbnail")
 	http_request_Thumbnail.set_download_file("user://"+GameName+"_Thumnail.JPG")
-	http_request_Thumbnail.request(link)
+	var error=http_request_Thumbnail.request(link)
+	if error!=OK:
+		print("Thumbnail Request Error: "+str(error))
 #Receive for Game Thumbnail
 func _receive_game_thumbnail(_result, _response_code, _headers, body):
 	remove_child(http_request_Thumbnail)
@@ -195,15 +196,17 @@ func _get_server_HostData():
 	http_request_HostData = HTTPRequest.new()
 	add_child(http_request_HostData)
 	http_request_HostData.connect("request_completed", self, "_receive_server_HostData")
-	http_request_HostData.request("https://raw.githubusercontent.com/Elfiawesome/GameLauncher/main/GameFileLinks/HostData.json")
+	var error=http_request_HostData.request("https://raw.githubusercontent.com/Elfiawesome/GameLauncher/main/GameFileLinks/HostData.json")
+	if error!=OK:
+		print("Thumbnail Request Error: "+str(error))
 #Receive  for server details
 func _receive_server_HostData(_result, _response_code, _headers, body):
-	remove_child(http_request_HostData)
-	var StringResult=body.get_string_from_utf8()
-	NewHostData = JSON.parse(StringResult).result
-	_on_HostData_ready()
-	print("Succesfully received Server HostData")
-
+	if _result==0:
+		remove_child(http_request_HostData)
+		var StringResult=body.get_string_from_utf8()
+		NewHostData = JSON.parse(StringResult).result
+		_on_HostData_ready()
+		print("Succesfully received Server HostData")
 
 #Functions
 func file_exists(path: String):

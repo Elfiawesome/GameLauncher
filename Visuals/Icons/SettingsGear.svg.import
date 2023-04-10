@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icons.svg-937e4988aca6196c9fa3cba78ded8f07.stex"
+path="res://.import/SettingsGear.svg-d910cae4d7437a74bfad7dc8d39b6c42.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://themes/icons.svg"
-dest_files=[ "res://.import/icons.svg-937e4988aca6196c9fa3cba78ded8f07.stex" ]
+source_file="res://Visuals/Icons/SettingsGear.svg"
+dest_files=[ "res://.import/SettingsGear.svg-d910cae4d7437a74bfad7dc8d39b6c42.stex" ]
 
 [params]
 
@@ -32,4 +32,4 @@ process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true
-svg/scale=1.0
+svg/scale=0.3

@@ -1,7 +1,7 @@
 [gd_resource type="Theme" load_steps=51 format=2]
 
-[ext_resource path="res://themes/ebrima.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://themes/icons.svg" type="Texture" id=2]
+[ext_resource path="res://Visuals/themes/ebrima.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Visuals/themes/icons.svg" type="Texture" id=2]
 
 [sub_resource type="DynamicFont" id=21]
 size = 20
