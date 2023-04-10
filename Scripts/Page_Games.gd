@@ -21,6 +21,7 @@ func _receive_HostData(result, _response_code, _headers, body):
 		var StringResult=body.get_string_from_utf8()
 		HostData=JSON.parse(StringResult).result
 		print("Succesfully receive HostData")
+		print(HostData)
 		IsHostDataReady=true
 		_on_HostData_ready()
 func _on_HostData_ready():	
