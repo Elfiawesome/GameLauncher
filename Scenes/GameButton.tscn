@@ -57,8 +57,7 @@ color = Color( 0.137255, 0.133333, 0.141176, 1 )
 [node name="Highlight" type="ColorRect" parent="Button"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -164.0
-margin_bottom = -4.0
+margin_bottom = 26.0
 mouse_filter = 2
 color = Color( 0.2, 0.27451, 0.333333, 1 )
 

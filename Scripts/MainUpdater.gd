@@ -43,14 +43,11 @@ func _initialize_file_links():#For uploading purposes only
 			"FileLink":"https://github.com/Elfiawesome/EliteCardWars/releases/download/TestingBuilds/EliteCardWarsTestingBuild_v1.0.4.4.zip",
 			"FileName":"EliteCardWars.exe"
 		},
-		"InvalidGame":{
-		},
-		"GameTestHere":{
-			
-		},
-		"OtherThing":{
+		"PlatformerEngine":{
 			"Version":"0.0.1",
-			"FileLink":""
+			"FileLink":"https://github.com/Elfiawesome/GameLauncher/releases/download/OtherGames/PlatformerEngine.zip",
+			"FileName":"PlatformerEngine.exe",
+			"ThumbnailLink":"https://raw.githubusercontent.com/Elfiawesome/GameLauncher/main/GameFileLinks/Thumbnails/PlatformerEngine"
 		}
 	}
 	var UpdaterData={
