@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scripts/DownloadButton.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/TileBar.gd" type="Script" id=2]
@@ -14,6 +14,8 @@
 [ext_resource path="res://Visuals/Icons/SettingsGear.svg" type="Texture" id=12]
 [ext_resource path="res://Scripts/Page_Games.gd" type="Script" id=13]
 [ext_resource path="res://Scripts/MainUpdater.gd" type="Script" id=14]
+[ext_resource path="res://Scripts/DownloadManager.gd" type="Script" id=15]
+[ext_resource path="res://LauncherIcon.png" type="Texture" id=16]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -158,11 +160,16 @@ margin_right = 960.0
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/MainBox/TileBar"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 10.0
+margin_left = 32.0
 margin_bottom = 6.0
 custom_fonts/font = ExtResource( 9 )
 text = "Game Launcher"
 valign = 1
+
+[node name="Sprite" type="Sprite" parent="MarginContainer/HBoxContainer/MainBox/TileBar"]
+position = Vector2( 14, 18 )
+scale = Vector2( 0.0127258, 0.0127258 )
+texture = ExtResource( 16 )
 
 [node name="Body" type="Control" parent="MarginContainer/HBoxContainer/MainBox"]
 margin_top = 30.0
@@ -177,8 +184,16 @@ script = ExtResource( 13 )
 
 [node name="Settings" type="Control" parent="MarginContainer/HBoxContainer/MainBox/Body"]
 visible = false
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/MainBox/Body/Settings"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 9 )
+text = "I was too lazy to actually do a settings menu :<"
+align = 1
+valign = 1
 
 [node name="Game" type="MarginContainer" parent="MarginContainer/HBoxContainer/MainBox/Body"]
 visible = false
@@ -224,6 +239,9 @@ margin_right = 704.0
 margin_bottom = 405.0
 rect_min_size = Vector2( 0, 5 )
 color = Color( 0.309804, 0.376471, 0.815686, 1 )
+
+[node name="DownloadManager" type="Node" parent="MarginContainer"]
+script = ExtResource( 15 )
 
 [connection signal="gui_input" from="MarginContainer/HBoxContainer/SideBar/VBoxContainer/ToggleExpand/ColorRect" to="MarginContainer/HBoxContainer/SideBar/VBoxContainer/ToggleExpand" method="_on_ColorRect_gui_input"]
 [connection signal="mouse_entered" from="MarginContainer/HBoxContainer/SideBar/VBoxContainer/ToggleExpand/ColorRect" to="MarginContainer/HBoxContainer/SideBar/VBoxContainer/ToggleExpand" method="_on_ColorRect_mouse_entered"]

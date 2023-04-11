@@ -7,6 +7,8 @@ onready var MainButton=$Button
 onready var MainButtonText=$Button/Label
 onready var MainButtonProgressBar=$Button/ProgressBar
 onready var Animator=$AnimationPlayer
+onready var Trash=$Trash
+onready var TrashHighlight=$Trash/TrashHighlight
 var IsButtonHighlight=false
 enum ButtonState{DownloadGame,DownloadingGame,UpdateGame,PlayGame}
 var state=ButtonState.DownloadGame
@@ -15,6 +17,8 @@ var HttpRequest_Thumbnail: HTTPRequest
 var HttpRequest_Game: HTTPRequest
 var FileName=""
 var IsDownloadingGame=false
+onready var DownloadManager=get_parent().DownloadManager
+var DownloadID=-1
 #File Location Vars
 var GameDir="user://GameFolders/"
 
@@ -33,10 +37,12 @@ func _ready():
 	#Get thumbnail
 	if HostData.has("ThumbnailLink"):
 		_get_Thumbnail(HostData["ThumbnailLink"],GameDir+"/GameThumbnail.")
-	_check_game_state()
-
+	
+	if DownloadID==-1:
+		_check_game_state()
 
 func _check_game_state():
+	Trash.visible=false
 	#Check if game exists
 	if !HostData.has("FileName"):#get_game
 		MainButtonText.text="Missing FileName in HostData"
@@ -55,6 +61,7 @@ func _check_game_state():
 				return
 		state=ButtonState.PlayGame
 		MainButtonText.text="Play Game"
+		Trash.visible=true
 
 #Get Thumbnail
 func _get_Thumbnail(link:String, FileLocation:String):
@@ -86,11 +93,10 @@ func _on_Button_gui_input(event):
 				HostData["Version"]="0.0.0"
 			match(state):
 				ButtonState.DownloadGame:
-					_get_Game(HostData["FileLink"],GameDir,HostData["Version"])
+					DownloadID=DownloadManager._get_game_zip(HostData["FileLink"],GameDir,HostData["Version"],false)
 					state=ButtonState.DownloadingGame
 				ButtonState.UpdateGame:
-					_remove_all_gamefiles()
-					_get_Game(HostData["FileLink"],GameDir,HostData["Version"])
+					DownloadID=DownloadManager._get_game_zip(HostData["FileLink"],GameDir,HostData["Version"],true)
 					state=ButtonState.DownloadingGame
 				ButtonState.PlayGame:
 					OS.shell_open(OS.get_user_data_dir()+"/GameFolders/"+GameName+"/"+HostData["FileName"])
@@ -102,54 +108,29 @@ func _on_Button_mouse_exited():
 	if IsButtonHighlight:
 		Animator.play_backwards("MouseHoverOverButton")
 		IsButtonHighlight=false
+#Delete Press
+func _on_TrashCollision_gui_input(event):
+	if event is InputEventMouseButton:
+		if event.is_pressed() && event.get_button_index()==1:
+			if GameDir!="user://GameFolders/":
+				DownloadManager._remove_all_gamefiles(GameDir)
+				_check_game_state()
+func _on_TrashCollision_mouse_entered():
+	TrashHighlight.visible=true
+func _on_TrashCollision_mouse_exited():
+	TrashHighlight.visible=false
 
-
-
-#get Game
-func _get_Game(link:String, FileLocation:String, Version:String):
-	HttpRequest_Game = HTTPRequest.new()
-	add_child(HttpRequest_Game)
-	var DownloadDir=FileLocation+"/"+link.get_file()
-	HttpRequest_Game.connect("request_completed",self,"_receive_Game",[DownloadDir,Version])
-	HttpRequest_Game.set_download_file(DownloadDir)
-	var error=HttpRequest_Game.request(link)
-	if error!=OK:
-		print("Error Request Game Files: "+str(error))
-		IsDownloadingGame=false
-		return
-	IsDownloadingGame=true
-func _receive_Game(result, _response_code, _headers, _body, FileLocation, Version):
-	remove_child(HttpRequest_Game)
-	IsDownloadingGame=false
-	if result==0:#If succesfull
-		#Unzip Game
-		unzip(FileLocation,GameDir+"/")
-		#Create Version number
-		var file = File.new()
-		file.open(GameDir+"/Version.txt", File.WRITE)
-		file.store_string(Version)
-		file.close()
-	_check_game_state()
 func _process(_delta):
-	if IsDownloadingGame:
-		var bodySize: int = HttpRequest_Game.get_body_size()
-		var downloadedBytes: int = HttpRequest_Game.get_downloaded_bytes()
-		MainButtonText.text="Downloading Game "+str(abs(round(float(downloadedBytes)/bodySize*100)))+"%"
-		var wid=rect_size.x
-		MainButtonProgressBar.rect_size=Vector2(wid*downloadedBytes/bodySize,MainButtonProgressBar.rect_size.y)
-func _remove_all_gamefiles():
-	#Remove all files
-	var FileLocation=GameDir
-	var dir=Directory.new()
-	dir.open(FileLocation)
-	dir.list_dir_begin()
-	while true:
-		var f=dir.get_next()
-		if f == "":
-			break;
-		elif not f.begins_with("."):
-			dir.remove(FileLocation+"/"+f)
-	dir.list_dir_end()
+	if DownloadID!=-1:
+		if DownloadManager.HttpsRequestDictionaryProgress.has(DownloadID):
+			var progress=DownloadManager.HttpsRequestDictionaryProgress[DownloadID]
+			var wid=rect_size.x
+			MainButtonProgressBar.rect_size=Vector2(wid*progress,MainButtonProgressBar.rect_size.y)
+			MainButtonText.text="Downloading Game "+str(int(progress*100))+"%"
+		if DownloadManager.CompletedRequests.has(DownloadID):
+			DownloadManager._IsSatisfiedWithDownload(DownloadID)
+			DownloadID=-1
+			_check_game_state()
 
 #functions
 func file_exists(path: String):
@@ -162,39 +143,11 @@ func file_create_folder(path:String, FolderName:String):
 	var dir=Directory.new()
 	dir.open(path)
 	dir.make_dir(FolderName)
-func unzip(sourceFile,destination):
-	var zip_file = sourceFile
-	var storage_path = destination
-	
-	var gdunzip = load('res://addons/gdunzip.gd').new()
-	var loaded = gdunzip.load(zip_file)
-
-	if !loaded:
-		print('- Failed loading zip file')
-		return false
-	ProjectSettings.load_resource_pack(zip_file)
-	
-	for f in gdunzip.files:
-		var readFile = File.new()
-		if readFile.file_exists("res://"+f):
-			readFile.open(("res://"+f), File.READ)
-			var content = readFile.get_buffer(readFile.get_len())
-			readFile.close()
-			
-			var base_dir = storage_path + f.get_base_dir()
-			
-			var dir = Directory.new()
-			dir.make_dir(base_dir)
-			
-			var writeFile = File.new()
-			writeFile.open(storage_path + f, File.WRITE)
-			writeFile.store_buffer(content)
-			writeFile.close()
 func readCurrentVersion(GameLocation):
 	var curversion="0.0.0"
-	if file_exists(GameLocation+"/version.txt"):
+	if file_exists(GameLocation+"/Version.txt"):
 		var file = File.new()
-		file.open(GameLocation+"/version.txt", File.READ)
+		file.open(GameLocation+"/Version.txt", File.READ)
 		curversion=file.get_as_text()
 		file.close()
 	return curversion
@@ -211,3 +164,4 @@ func get_version_value(version:String):
 		totalval+=int(i)*mul
 		mul=mul/10
 	return totalval
+

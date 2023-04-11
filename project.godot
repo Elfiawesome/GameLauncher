@@ -13,7 +13,8 @@ config_version=4
 config/name="CardWarsLauncher"
 run/main_scene="res://Scenes/Main.tscn"
 boot_splash/show_image=false
-config/icon="res://icon.png"
+config/icon="res://LauncherIcon.png"
+config/windows_native_icon="res://LauncherIcon.ico"
 
 [display]
 
@@ -28,6 +29,12 @@ editor=false
 file=false
 editor_data=false
 persistent=false
+rcedit=false
+windows=false
+test=false
+"test width"=false
+stretcg=false
+stretch=false
 
 [gui]
 

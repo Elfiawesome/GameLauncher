@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/GameButton.gd" type="Script" id=1]
+[ext_resource path="res://Visuals/Icons/Trash.svg" type="Texture" id=2]
 
 [sub_resource type="Animation" id=1]
 resource_name = "MouseHoverOverButton"
@@ -57,14 +58,14 @@ color = Color( 0.137255, 0.133333, 0.141176, 1 )
 [node name="Highlight" type="ColorRect" parent="Button"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = 26.0
+margin_right = -164.0
+margin_bottom = -4.0
 mouse_filter = 2
 color = Color( 0.2, 0.27451, 0.333333, 1 )
 
 [node name="Label" type="Label" parent="Button"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-text = "Lbael"
 align = 1
 valign = 1
 
@@ -77,6 +78,34 @@ margin_bottom = 30.0
 anims/MouseHoverOverButton = SubResource( 1 )
 anims/RESET = SubResource( 2 )
 
+[node name="Trash" type="Sprite" parent="."]
+visible = false
+position = Vector2( 148, 16 )
+scale = Vector2( 0.0113052, 0.0113052 )
+texture = ExtResource( 2 )
+
+[node name="TrashCollision" type="Control" parent="Trash"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -973.0
+margin_top = -1061.0
+margin_right = -973.0
+margin_bottom = -1061.0
+
+[node name="TrashHighlight" type="ColorRect" parent="Trash"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -973.0
+margin_top = -1061.0
+margin_right = -973.0
+margin_bottom = -1061.0
+mouse_filter = 2
+color = Color( 0.815686, 0.0392157, 0.0392157, 0.466667 )
+
 [connection signal="gui_input" from="Button" to="." method="_on_Button_gui_input"]
 [connection signal="mouse_entered" from="Button" to="." method="_on_Button_mouse_entered"]
 [connection signal="mouse_exited" from="Button" to="." method="_on_Button_mouse_exited"]
+[connection signal="gui_input" from="Trash/TrashCollision" to="." method="_on_TrashCollision_gui_input"]
+[connection signal="mouse_entered" from="Trash/TrashCollision" to="." method="_on_TrashCollision_mouse_entered"]
+[connection signal="mouse_exited" from="Trash/TrashCollision" to="." method="_on_TrashCollision_mouse_exited"]
