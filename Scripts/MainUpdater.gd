@@ -64,7 +64,7 @@ func _initialize_file_links():#For uploading purposes only
 	}
 	var UpdaterData={
 		"Link":"https://github.com/Elfiawesome/GameLauncher/releases/download/GameLauncher/GameLauncher.exe",
-		"Version":0
+		"Version":"0.0.1"
 	}
 	var file=File.new()
 	file.open("res://GameFileLinks/HostData.json",File.WRITE)
