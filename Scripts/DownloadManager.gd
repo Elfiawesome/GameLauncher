@@ -35,7 +35,7 @@ func _receive_game_zip(result, _response_code, _headers, _body, id, FileLocation
 	print("Download Manager Completed ID: "+str(id))
 
 #Track progress
-func _process(delta):
+func _process(_delta):
 	for id in HttpsRequestDictionary:
 		var HttpReq=HttpsRequestDictionary[id]
 		var bodySize:float = HttpReq.get_body_size()

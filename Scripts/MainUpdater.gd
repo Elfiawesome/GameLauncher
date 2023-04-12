@@ -4,32 +4,10 @@ var HttpRequest: HTTPRequest
 
 func _ready():
 	_initialize_file_links()
-#	if file_exists("user://Version"):
-#		var file = File.new()
-#		file.open("user://Version", File.WRITE)
-#		file.store_string(VersionNumber)
-#		file.close()
-#	_get_launcherDetails()
-#func _get_launcherDetails():
-#	HttpRequest=HTTPRequest.new()
-#	add_child(HttpRequest)
-#	HttpRequest.connect("request_completed",self,"_receive_launcherDetails")
-#	var error=HttpRequest.request("https://raw.githubusercontent.com/Elfiawesome/GameLauncher/main/GameFileLinks/LauncherData.json")
-#	if error!=OK:
-#		print("Error Requesting Server Host Data: "+str(error))
-#func _receive_launcherDetails(result, _response_code, _headers, body):
-#	remove_child(HttpRequest)
-#	if result==0:
-#		var StringResult=body.get_string_from_utf8()
-#		var LauncherData=JSON.parse(StringResult).result
-#		print("Succesfully receive LauncherData")
-#		if int(LauncherData["Version"])>VersionNumber:
-#			print("Version Update Required")
+	print(OS.get_executable_path())
+	
 
 #Functions
-func file_exists(path: String):
-	var dir=Directory.new()
-	return dir.file_exists(path)
 func _initialize_file_links():#For uploading purposes only
 	var HostData = {
 		"EliteCardWars":{
@@ -64,7 +42,9 @@ func _initialize_file_links():#For uploading purposes only
 	}
 	var UpdaterData={
 		"Link":"https://github.com/Elfiawesome/GameLauncher/releases/download/GameLauncher/GameLauncher.exe",
-		"Version":"0.0.1"
+		"Version":"0.0.1",
+		"FolderName":"GameLauncher",
+		"ExeName":"GameLauncher.exe"
 	}
 	var file=File.new()
 	file.open("res://GameFileLinks/HostData.json",File.WRITE)
