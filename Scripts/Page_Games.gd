@@ -25,7 +25,6 @@ func _receive_HostData(result, _response_code, _headers, body):
 		HostData=JSON.parse(StringResult).result
 		if !IsHostDataReady:
 			print("Succesfully receive HostData")
-			print(HostData)
 			_on_HostData_ready()
 			IsHostDataReady=true
 		else:
@@ -71,6 +70,7 @@ func _process(_delta):
 	TimerRequest+=1
 	if TimerRequest>200:
 		TimerRequest=0
+		_get_HostData()
 
 func _refresh_games():
 	for game in GameListOrder:

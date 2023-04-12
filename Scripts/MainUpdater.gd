@@ -11,8 +11,8 @@ func _ready():
 func _initialize_file_links():#For uploading purposes only
 	var HostData = {
 		"EliteCardWars":{
-			"Version":"1.0.41",
-			"FileLink":"https://github.com/Elfiawesome/EliteCardWars/releases/download/TestingBuilds/EliteCardWarsTestingBuild_v1.0.4.1.zip",#"https://github.com/Elfiawesome/EliteCardWars/releases/download/TestingBuilds/EliteCardWarsTestingBuild_v1.0.4.4.zip",
+			"Version":"1.0.4.1",
+			"FileLink":"https://github.com/Elfiawesome/EliteCardWars/releases/download/TestingBuilds/EliteCardWarsTestingBuild_v1.0.4.4.zip",#"https://github.com/Elfiawesome/EliteCardWars/releases/download/TestingBuilds/EliteCardWarsTestingBuild_v1.0.4.4.zip",
 			"FileName":"EliteCardWars.exe",
 			"ThumbnailLink":"https://raw.githubusercontent.com/Elfiawesome/GameLauncher/main/GameFileLinks/Thumbnails/EliteCardWars.JPG"
 		},
@@ -41,8 +41,8 @@ func _initialize_file_links():#For uploading purposes only
 		}
 	}
 	var UpdaterData={
-		"Link":"https://github.com/Elfiawesome/GameLauncher/releases/download/GameLauncher/GameLauncher.exe",
-		"Version":"0.0.1",
+		"Link":"https://github.com/Elfiawesome/GameLauncher/releases/download/GameLauncher/GameLauncher_v0.0.2.exe",
+		"Version":"0.0.2",
 		"FolderName":"GameLauncher",
 		"ExeName":"GameLauncher.exe"
 	}
