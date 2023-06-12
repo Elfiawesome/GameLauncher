@@ -5,12 +5,33 @@
     },
     "Games":{
         "1":{
-            "HostVersion":"1.0.7",
+            "GameVersion":"1.0.7",
             "GameLink": "https://github.com/Elfiawesome/EliteCardWars/releases/download/TestingBuilds/EliteCardWarsTestingBuild_v1.0.7.zip",
             "ExeFileName":"EliteCardWars.exe",
             "ThumbnailLink":"https://raw.githubusercontent.com/Elfiawesome/GameLauncher/main/GameFileLinks/Thumbnails/EliteCardWars3.jpg",
             "SplashArt":"",
             "GameName":"Elite Card Wars",
+            "GameDescription":"",
+            "MiscData":{}
+        },
+        "2":{
+            "GameVersion":"0.0.1",
+            "GameLink": "https://github.com/Elfiawesome/EliteCardWars/releases/download/TestingBuilds/EliteCardWarsTestingBuild_v1.0.4.4.zip",
+            "ExeFileName":"EliteCardWars.exe",
+            "ThumbnailLink":"https://raw.githubusercontent.com/Elfiawesome/GameLauncher/main/GameFileLinks/Thumbnails/EliteCardWars3.jpg",
+            "SplashArt":"",
+            "GameName":"Elite Card Wars experimental",
+            "GameDescription":"",
+            "MiscData":{}
+        },
+        "3":{
+            "GameVersion":"0.0.1",
+            "GameLink": "https://github.com/Elfiawesome/GameLauncher/releases/download/OtherGames/LetThereBeChaos.zip",
+            "ExeFileName":"EliteCardWars.exe",
+            "ThumbnailLink":"https://raw.githubusercontent.com/Elfiawesome/GameLauncher/main/GameFileLinks/Thumbnails/LetThereBeChaos.jpg",
+            "SplashArt":"",
+            "GameName":"Let there be chaos",
+            "GameDescription":"",
             "MiscData":{}
         }
     },
