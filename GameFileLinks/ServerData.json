@@ -1,0 +1,20 @@
+{
+    "DataSettings":{
+        "ServerDataVersion":"0.0.1",
+        "OthersStuff?":""
+    },
+    "Games":{
+        "1":{
+            "HostVersion":"1.0.7",
+            "GameLink": "https://github.com/Elfiawesome/EliteCardWars/releases/download/TestingBuilds/EliteCardWarsTestingBuild_v1.0.7.zip",
+            "ExeFileName":"EliteCardWars.exe",
+            "ThumbnailLink":"https://raw.githubusercontent.com/Elfiawesome/GameLauncher/main/GameFileLinks/Thumbnails/EliteCardWars3.jpg",
+            "SplashArt":"",
+            "GameName":"Elite Card Wars",
+            "MiscData":{}
+        }
+    },
+    "GameShowcase":[
+        "1"
+    ]
+}
