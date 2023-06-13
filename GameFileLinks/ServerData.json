@@ -33,6 +33,26 @@
             "GameName":"Let there be chaos",
             "GameDescription":"",
             "MiscData":{}
+        },
+        "4":{
+            "GameVersion":"0.0.1",
+            "GameLink": "https://github.com/Elfiawesome/GameLauncher/releases/download/OtherGames/PlatformerEngine.zip",
+            "ExeFileName":"PlatformerEngine.exe",
+            "ThumbnailLink":"https://raw.githubusercontent.com/Elfiawesome/GameLauncher/main/GameFileLinks/Thumbnails/PlatformerEngine.jpg",
+            "SplashArt":"",
+            "GameName":"Platformer Engine",
+            "GameDescription":"",
+            "MiscData":{}
+        },
+        "5":{
+            "GameVersion":"0.0.1",
+            "GameLink": "https://github.com/Elfiawesome/GameLauncher/releases/download/OtherGames/SkyVessels2022.zip",
+            "ExeFileName":"SkyVessels2022.exe",
+            "ThumbnailLink":"https://raw.githubusercontent.com/Elfiawesome/GameLauncher/main/GameFileLinks/Thumbnails/SkyVessels2022.jpg",
+            "SplashArt":"",
+            "GameName":"Sky Vessels",
+            "GameDescription":"",
+            "MiscData":{}
         }
     },
     "GameShowcase":[
